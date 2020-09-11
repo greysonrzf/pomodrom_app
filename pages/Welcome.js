@@ -18,7 +18,7 @@ function Welcome() {
   return (
     <LinearGradient
       // Background Linear Gradient
-      colors={['#e7f3fe', '#9abee0']}
+      colors={['#222', '#000']}
       style={styles.container}
     >
       <Image style={styles.banner} source={bannerImg} />
@@ -42,20 +42,20 @@ const styles = StyleSheet.create({
   },
   banner: {
     width: '100%',
-    height: 250,
+    height: 300,
     resizeMode: 'contain',
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#1C354F',
+    color: '#fff',
     textAlign: 'center',
     maxWidth: 240,
   },
   button: {
     width: 72,
     height: 72,
-    backgroundColor: '#2e5b9a',
+    backgroundColor: '#b80000',
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center'

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Vibration } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons'
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
@@ -15,6 +15,15 @@ function Timer() {
 
   const [timerEnabled, setTimerEnabled] = useState(false)
   const [secondsEllapsed, setSecondsEllapsed] = useState(0)
+
+  useEffect(() => {
+    if (secondsEllapsed === 1500) {
+      clearInterval(timerRef.current)
+      Vibration.vibrate(2000)
+      setSecondsEllapsed(0)
+      setTimerEnabled(false)
+    }
+  }, [secondsEllapsed])
 
   function toggleTimer() {
     if (timerEnabled) {
@@ -33,7 +42,7 @@ function Timer() {
   return (
     <LinearGradient
       // Background Linear Gradient
-      colors={['#e7f3fe', '#9abee0']}
+      colors={['#222', '#000']}
       style={styles.container}
     >
 
@@ -42,9 +51,9 @@ function Timer() {
       <AnimatedCircularProgress
         size={300}
         width={12}
-        fill={(secondsEllapsed * 100) / 600}
+        fill={(secondsEllapsed * 100) / 1500}
         rotation={0}
-        tintColor="#3d5875"
+        tintColor="#b80000"
         backgroundColor="#fff">
         {
           () => (
@@ -79,14 +88,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#1C354F',
+    color: '#fff',
     textAlign: 'center',
     maxWidth: 240,
   },
   button: {
     width: 72,
     height: 72,
-    backgroundColor: '#2e5b9a',
+    backgroundColor: '#b80000',
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center'
@@ -94,7 +103,7 @@ const styles = StyleSheet.create({
   progress: {
     fontSize: 60,
     fontWeight: 'bold',
-    color: '#1C354F',
+    color: '#b80000',
     textAlign: 'center',
   }
 })
